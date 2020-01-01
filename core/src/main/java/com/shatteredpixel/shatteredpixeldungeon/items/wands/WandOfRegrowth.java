@@ -83,8 +83,9 @@ public class WandOfRegrowth extends Wand {
 		}
 
 		float numPlants, numDews, numPods, numStars;
-		
-		int overLimit = totChrgUsed - chargeLimit(Dungeon.hero.lvl);
+
+		// If the wand of regrowth buff is on, infinite charges
+		int overLimit = Dungeon.isLearner(1) ? 0 : totChrgUsed - chargeLimit(Dungeon.hero.lvl);
 
 		int chrgUsed = chargesPerCast();
 		//numbers greater than n*100% means n guaranteed plants, e.g. 210% = 2 plants w/10% chance for 3 plants.

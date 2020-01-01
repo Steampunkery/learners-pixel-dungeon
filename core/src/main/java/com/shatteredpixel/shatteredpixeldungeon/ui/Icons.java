@@ -33,6 +33,8 @@ public enum Icons {
 	INFO,
 	CHALLENGE_OFF,
 	CHALLENGE_ON,
+	LEARNERS_OFF,
+	LEARNERS_ON,
 	PREFS,
 	LANGS,
 	EXIT,
@@ -109,6 +111,12 @@ public enum Icons {
 			break;
 		case ARROW:
 			icon.frame( icon.texture.uvRect( 16, 16, 27, 27 ) );
+			break;
+		case LEARNERS_OFF:
+			icon.frame(icon.texture.uvRect(28, 16, 41, 29));
+			break;
+		case LEARNERS_ON:
+			icon.frame(icon.texture.uvRect(42, 16, 55, 29));
 			break;
 			
 		case SKULL:
