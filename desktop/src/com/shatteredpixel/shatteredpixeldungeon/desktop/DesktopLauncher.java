@@ -67,7 +67,7 @@ public class DesktopLauncher {
 		
 		Game.version = DesktopLauncher.class.getPackage().getSpecificationVersion();
 		if (Game.version == null) {
-			Game.version = "0.7.5e-INDEV";
+			Game.version = "0.1-INDEV";
 		}
 		
 		try {
