@@ -81,7 +81,7 @@ public class WandOfRegrowth extends Wand {
 
 		ArrayList<Integer> cells = new ArrayList<>(cone.cells);
 
-		int overLimit = totChrgUsed - chargeLimit(Dungeon.hero.lvl);
+		int overLimit = Dungeon.isLearner(1) ? 0 : totChrgUsed - chargeLimit(Dungeon.hero.lvl);
 		float furrowedChance = overLimit > 0 ? (overLimit / (10f + Dungeon.hero.lvl)) : 0;
 
 		int chrgUsed = chargesPerCast();

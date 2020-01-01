@@ -149,6 +149,32 @@ public class WndStartGame extends Window {
 			Dungeon.challenges = 0;
 			SPDSettings.challenges(0);
 		}
+
+		// Learner's Options menu
+		IconButton learnersIcon = new IconButton(
+				Icons.get( SPDSettings.learnersOptions() > 0 ? Icons.LEARNERS_ON :Icons.LEARNERS_OFF)) {
+			@Override
+			protected void onClick() {
+				ShatteredPixelDungeon.scene().add(new WndLearnersOptions(SPDSettings.learnersOptions(), true) {
+					public void onBackPressed() {
+						super.onBackPressed();
+						icon( Icons.get( SPDSettings.learnersOptions() > 0 ?
+								Icons.LEARNERS_ON :Icons.LEARNERS_OFF ) );
+					}
+				} );
+			}
+
+			@Override
+			public void update() {
+				if( !visible && GamesInProgress.selectedClass != null){
+					visible = true;
+				}
+				super.update();
+			}
+		};
+		learnersIcon.setRect(WIDTH - 37, HEIGHT - 20, 20, 20);
+		learnersIcon.visible = false;
+		add(learnersIcon);
 		
 		resize(WIDTH, HEIGHT);
 		

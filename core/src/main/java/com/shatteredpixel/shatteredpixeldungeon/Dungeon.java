@@ -151,6 +151,7 @@ public class Dungeon {
 	}
 
 	public static int challenges;
+	public static int learnerOptions;
 
 	public static Hero hero;
 	public static Level level;
@@ -173,6 +174,7 @@ public class Dungeon {
 
 		version = Game.versionCode;
 		challenges = SPDSettings.challenges();
+		learnerOptions = SPDSettings.learnersOptions();
 
 		seed = DungeonSeed.randomSeed();
 
@@ -221,8 +223,22 @@ public class Dungeon {
 		GamesInProgress.selectedClass.initHero( hero );
 	}
 
+	/**
+	 * @param mask The int mask representing the challenge.
+	 * @see com.shatteredpixel.shatteredpixeldungeon.Challenges
+	 * @return A boolean indicating whether the challenge is active
+	 */
 	public static boolean isChallenged( int mask ) {
 		return (challenges & mask) != 0;
+	}
+
+	/**
+	 * @param mask The int mask representing the learner's option.
+	 * @see com.shatteredpixel.shatteredpixeldungeon.LearnersOptions
+	 * @return A boolean indicating whether the learner's option is active
+	 */
+	public static boolean isLearner(int mask) {
+		return (learnerOptions & mask) != 0;
 	}
 	
 	public static Level newLevel() {

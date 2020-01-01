@@ -159,6 +159,7 @@ public class SPDSettings extends GameSettings {
 	public static final String KEY_LAST_CLASS	= "last_class";
 	public static final String KEY_CHALLENGES	= "challenges";
 	public static final String KEY_INTRO		= "intro";
+	public static final String KEY_LEARNERS     = "wor_buff";
 	
 	public static void intro( boolean value ) {
 		put( KEY_INTRO, value );
@@ -182,6 +183,14 @@ public class SPDSettings extends GameSettings {
 	
 	public static int challenges() {
 		return getInt( KEY_CHALLENGES, 0, 0, Challenges.MAX_VALUE );
+	}
+
+	public static void learnersOptions(int value) {
+		put(KEY_LEARNERS, value);
+	}
+
+	public static int learnersOptions() {
+		return getInt(KEY_LEARNERS, 0);
 	}
 	
 	//Audio
