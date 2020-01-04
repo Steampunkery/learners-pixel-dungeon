@@ -170,7 +170,8 @@ public class WndStartGame extends Window {
 				super.update();
 			}
 		};
-		learnersIcon.setRect(WIDTH - 37, HEIGHT - 20, 20, 20);
+		int offset = DeviceCompat.isDebug() || Badges.isUnlocked(Badges.Badge.VICTORY) ? 37 : 20;
+		learnersIcon.setRect(WIDTH - offset, HEIGHT - 20, 20, 20);
 		learnersIcon.visible = false;
 		add(learnersIcon);
 		

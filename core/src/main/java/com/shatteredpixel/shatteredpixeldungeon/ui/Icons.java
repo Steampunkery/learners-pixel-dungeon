@@ -113,10 +113,10 @@ public enum Icons {
 			icon.frame( icon.texture.uvRect( 16, 16, 27, 27 ) );
 			break;
 		case LEARNERS_OFF:
-			icon.frame(icon.texture.uvRect(28, 16, 41, 29));
+			icon.frame(icon.texture.uvRect(28, 16, 42, 30));
 			break;
 		case LEARNERS_ON:
-			icon.frame(icon.texture.uvRect(42, 16, 55, 29));
+			icon.frame(icon.texture.uvRect(43, 16, 57, 30));
 			break;
 			
 		case SKULL:
