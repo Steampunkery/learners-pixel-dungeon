@@ -541,7 +541,7 @@ public class GameScene extends PixelScene {
 	@Override
 	public synchronized void onPause() {
 		try {
-			Dungeon.saveAll();
+			Dungeon.saveAll(false);
 			Badges.saveGlobal();
 			Journal.saveGlobal();
 		} catch (IOException e) {

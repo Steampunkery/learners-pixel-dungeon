@@ -327,7 +327,7 @@ public class InterlevelScene extends PixelScene {
 			GameLog.wipe();
 		} else {
 			Mob.holdAllies( Dungeon.level );
-			Dungeon.saveAll();
+			Dungeon.saveAll(false);
 		}
 
 		Level level;
@@ -345,7 +345,7 @@ public class InterlevelScene extends PixelScene {
 		Mob.holdAllies( Dungeon.level );
 		
 		Buff.affect( Dungeon.hero, Chasm.Falling.class );
-		Dungeon.saveAll();
+		Dungeon.saveAll(false);
 
 		Level level;
 		if (Dungeon.depth >= Statistics.deepestFloor) {
@@ -361,7 +361,7 @@ public class InterlevelScene extends PixelScene {
 		
 		Mob.holdAllies( Dungeon.level );
 
-		Dungeon.saveAll();
+		Dungeon.saveAll(false);
 		Dungeon.depth--;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.switchLevel( level, level.exit );
@@ -371,7 +371,7 @@ public class InterlevelScene extends PixelScene {
 		
 		Mob.holdAllies( Dungeon.level );
 
-		Dungeon.saveAll();
+		Dungeon.saveAll(false);
 		Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.switchLevel( level, returnPos );

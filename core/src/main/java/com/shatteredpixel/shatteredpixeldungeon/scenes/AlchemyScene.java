@@ -286,7 +286,7 @@ public class AlchemyScene extends PixelScene {
 		fadeIn();
 		
 		try {
-			Dungeon.saveAll();
+			Dungeon.saveAll(false);
 			Badges.saveGlobal();
 			Journal.saveGlobal();
 		} catch (IOException e) {
@@ -406,7 +406,7 @@ public class AlchemyScene extends PixelScene {
 			}
 			
 			try {
-				Dungeon.saveAll();
+				Dungeon.saveAll(false);
 			} catch (IOException e) {
 				ShatteredPixelDungeon.reportException(e);
 			}
@@ -464,7 +464,7 @@ public class AlchemyScene extends PixelScene {
 		}
 		
 		try {
-			Dungeon.saveAll();
+			Dungeon.saveAll(false);
 			Badges.saveGlobal();
 			Journal.saveGlobal();
 		} catch (IOException e) {
