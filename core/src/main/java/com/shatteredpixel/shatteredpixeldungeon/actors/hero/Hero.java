@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Bones;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
+import com.shatteredpixel.shatteredpixeldungeon.LearnersOptions;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -121,6 +122,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.ui.QuickSlotButton;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndReload;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndResurrect;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem;
 import com.watabou.noosa.Camera;
@@ -1429,12 +1431,8 @@ public class Hero extends Char {
 		Actor.fixTime();
 		super.die( cause );
 
-		if (ankh == null) {
-			
-			reallyDie( cause );
-			
-		} else {
-			
+		if (ankh != null) {
+
 			Dungeon.deleteGame( GamesInProgress.curSlot, false );
 			final Ankh finalAnkh = ankh;
 			Game.runOnRenderThread(new Callback() {
@@ -1443,6 +1441,14 @@ public class Hero extends Char {
 					GameScene.show( new WndResurrect( finalAnkh, cause ) );
 				}
 			});
+		// 14 is the bit mask for any saving option being enabled
+		} else if ((Dungeon.learnerOptions & 14) != 0) {
+
+			GameScene.show(new WndReload(cause));
+
+		} else {
+
+			reallyDie( cause );
 			
 		}
 	}

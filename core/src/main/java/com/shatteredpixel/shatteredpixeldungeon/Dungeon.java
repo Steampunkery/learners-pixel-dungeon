@@ -417,7 +417,11 @@ public class Dungeon {
 		
 		observe();
 		try {
-			saveAll();
+			if (((learnerOptions & 2) != 0) || ((learnerOptions & 4) != 0)) {
+				saveAll(true);
+			} else {
+				saveAll(false);
+			}
 		} catch (IOException e) {
 			ShatteredPixelDungeon.reportException(e);
 			/*This only catches IO errors. Yes, this means things can go wrong, and they can go wrong catastrophically.
@@ -489,7 +493,7 @@ public class Dungeon {
 	private static final String QUESTS		= "quests";
 	private static final String BADGES		= "badges";
 	
-	public static void saveGame( int save ) {
+	public static void saveGame( int save, boolean reloadable ) {
 		try {
 			Bundle bundle = new Bundle();
 
@@ -545,8 +549,9 @@ public class Dungeon {
 			Bundle badges = new Bundle();
 			Badges.saveLocal( badges );
 			bundle.put( BADGES, badges );
-			
-			FileUtils.bundleToFile( GamesInProgress.gameFile(save), bundle);
+
+			String fileName = reloadable ? GamesInProgress.gameReload(save) : GamesInProgress.gameSave(save);
+			FileUtils.bundleToFile(fileName, bundle);
 			
 		} catch (IOException e) {
 			GamesInProgress.setUnknown( save );
@@ -561,12 +566,17 @@ public class Dungeon {
 		FileUtils.bundleToFile(GamesInProgress.depthFile( save, depth), bundle);
 	}
 	
-	public static void saveAll() throws IOException {
+	public static void saveAll(boolean reloadable) throws IOException {
 		if (hero != null && hero.isAlive()) {
 			
 			Actor.fixTime();
-			saveGame( GamesInProgress.curSlot );
+			saveGame( GamesInProgress.curSlot, reloadable );
 			saveLevel( GamesInProgress.curSlot );
+
+			// Delete save file because it won't overwrite if the filename is different
+			if (reloadable) {
+				FileUtils.deleteFile(GamesInProgress.gameSave(GamesInProgress.curSlot));
+			}
 
 			GamesInProgress.set( GamesInProgress.curSlot, depth, challenges, hero );
 
@@ -578,7 +588,7 @@ public class Dungeon {
 	}
 	
 	public static void loadGame( int save, boolean fullLoad ) throws IOException {
-		
+
 		Bundle bundle = FileUtils.bundleFromFile( GamesInProgress.gameFile( save ) );
 
 		version = bundle.getInt( VERSION );
@@ -700,10 +710,18 @@ public class Dungeon {
 			return level;
 		}
 	}
-	
+
+	/**
+	 * Deletes an entire game's saves, including reloads. USE WTH CAUTION!
+	 * @param save The slot from which to delete the saves
+	 * @param deleteLevels Whether to delete the levels as well
+	 */
 	public static void deleteGame( int save, boolean deleteLevels ) {
-		
-		FileUtils.deleteFile(GamesInProgress.gameFile(save));
+		String gameSave = GamesInProgress.gameSave(save);
+		if (FileUtils.fileExists(gameSave)) FileUtils.deleteFile(gameSave);
+
+		String gameReload = GamesInProgress.gameReload(save);
+		if (FileUtils.fileExists(gameReload)) FileUtils.deleteFile(gameReload);
 		
 		if (deleteLevels) {
 			FileUtils.deleteDir(GamesInProgress.gameFolder(save));

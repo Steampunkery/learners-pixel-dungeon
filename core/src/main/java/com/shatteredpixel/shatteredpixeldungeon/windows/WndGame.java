@@ -42,7 +42,7 @@ public class WndGame extends Window {
 	private static final int GAP		= 2;
 	
 	private int pos;
-	
+
 	public WndGame() {
 		
 		super();
@@ -95,7 +95,7 @@ public class WndGame extends Window {
 					@Override
 					protected void onClick() {
 						try {
-							Dungeon.saveAll();
+							Dungeon.saveAll(false);
 						} catch (IOException e) {
 							ShatteredPixelDungeon.reportException(e);
 						}
@@ -107,7 +107,7 @@ public class WndGame extends Window {
 					@Override
 					protected void onClick() {
 						try {
-							Dungeon.saveAll();
+							Dungeon.saveAll(false);
 						} catch (IOException e) {
 							ShatteredPixelDungeon.reportException(e);
 						}

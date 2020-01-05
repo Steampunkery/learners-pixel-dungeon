@@ -89,7 +89,7 @@ public class Amulet extends Item {
 	
 	private void showAmuletScene( boolean showText ) {
 		try {
-			Dungeon.saveAll();
+			Dungeon.saveAll(false);
 			AmuletScene.noText = !showText;
 			Game.switchScene( AmuletScene.class );
 		} catch (IOException e) {
