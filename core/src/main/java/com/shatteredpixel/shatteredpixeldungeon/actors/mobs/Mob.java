@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -64,6 +65,7 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -649,6 +651,14 @@ public abstract class Mob extends Char {
 		
 		if (Dungeon.hero.isAlive() && !Dungeon.level.heroFOV[pos]) {
 			GLog.i( Messages.get(this, "died") );
+		}
+
+		if (properties.contains(Property.BOSS) && ((Dungeon.learnerOptions & 24) != 0)) {
+			try {
+				Dungeon.saveAll(true);
+			} catch (IOException e) {
+				ShatteredPixelDungeon.reportException(e);
+			}
 		}
 		
 		super.die( cause );
