@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.LearnersOptions;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -653,7 +654,8 @@ public abstract class Mob extends Char {
 			GLog.i( Messages.get(this, "died") );
 		}
 
-		if (properties.contains(Property.BOSS) && ((Dungeon.learnerOptions & 24) != 0)) {
+		if (properties.contains(Property.BOSS)
+			&& Dungeon.isLearner(LearnersOptions.SAVE_AFTER_BOSS | LearnersOptions.SAVE_ALL)) {
 			try {
 				Dungeon.saveAll(true);
 			} catch (IOException e) {

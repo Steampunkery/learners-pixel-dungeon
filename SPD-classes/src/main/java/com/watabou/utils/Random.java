@@ -60,6 +60,10 @@ public class Random {
 		}
 	}
 
+	public static boolean coinFlip() {
+		return rand.nextBoolean();
+	}
+
 	//returns a uniformly distributed float in the range [0, 1)
 	public static float Float() {
 		return generators.peek().nextFloat();
