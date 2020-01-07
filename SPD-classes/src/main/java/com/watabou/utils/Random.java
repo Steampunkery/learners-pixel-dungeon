@@ -38,6 +38,10 @@ public class Random {
 		rand.setSeed(seed);
 	}
 
+	public static boolean coinFlip() {
+		return rand.nextBoolean();
+	}
+
 	//returns a uniformly distributed float in the range [0, 1)
 	public static float Float() {
 		return rand.nextFloat();
