@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.levels;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.LearnersOptions;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -57,6 +58,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Torch;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TimekeepersHourglass;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
@@ -182,7 +184,16 @@ public abstract class Level implements Bundlable {
 			if (Dungeon.isChallenged(Challenges.NO_FOOD)){
 				addItemToSpawn( new SmallRation() );
 			} else {
+				// 50% of the time, spawn another food item if the food option is enabled
+				if (Random.coinFlip() && Dungeon.isLearner(LearnersOptions.MORE_HP_AND_FOOD)) {
+					addItemToSpawn(Generator.random(Generator.Category.FOOD));
+				}
 				addItemToSpawn(Generator.random(Generator.Category.FOOD));
+			}
+
+			// 50% of the time, spawn a health potion if the HP option is enabled
+			if (Random.coinFlip() && Dungeon.isLearner(LearnersOptions.MORE_HP_AND_FOOD)) {
+				addItemToSpawn( new PotionOfHealing() );
 			}
 
 			if (Dungeon.isChallenged(Challenges.DARKNESS)){
