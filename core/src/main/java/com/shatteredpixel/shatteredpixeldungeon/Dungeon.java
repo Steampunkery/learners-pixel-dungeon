@@ -417,7 +417,8 @@ public class Dungeon {
 		
 		observe();
 		try {
-			if (((learnerOptions & 2) != 0) || ((learnerOptions & 4) != 0)) {
+			if (((learnerOptions & 18) != 0)
+				|| (((learnerOptions & 4) != 0) && bossLevel())) {
 				saveAll(true);
 			} else {
 				saveAll(false);
