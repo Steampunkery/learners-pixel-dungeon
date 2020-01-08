@@ -80,4 +80,7 @@ public class WndReload extends Window {
         btn.setRect( 0, pos > 0 ? pos += GAP : 0, WIDTH, BTN_HEIGHT );
         pos += BTN_HEIGHT;
     }
+
+    @Override
+    public void onBackPressed() {}
 }

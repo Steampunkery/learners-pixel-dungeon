@@ -1518,8 +1518,12 @@ public class Hero extends Char {
 		// 30 is the bit mask for any saving option being enabled
 		} else if (Dungeon.isLearner(30)) {
 
-			GameScene.show(new WndReload(cause));
-
+		    Game.runOnRenderThread(new Callback() {
+                @Override
+                public void call() {
+                    GameScene.show(new WndReload(cause));
+                }
+            });
 		} else {
 
 			reallyDie( cause );
