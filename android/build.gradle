@@ -25,6 +25,7 @@ android {
     compileSdkVersion appAndroidCompileSDK
 
     defaultConfig {
+        applicationId "com.thomasokeeffe.learnerspixeldungeon"
         manifestPlaceholders = [appName:appName]
         applicationId appPackageName
 
