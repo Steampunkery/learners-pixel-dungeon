@@ -1515,8 +1515,8 @@ public class Hero extends Char {
 					GameScene.show( new WndResurrect( finalAnkh, cause ) );
 				}
 			});
-		// 14 is the bit mask for any saving option being enabled
-		} else if ((Dungeon.learnerOptions & 14) != 0) {
+		// 30 is the bit mask for any saving option being enabled
+		} else if (Dungeon.isLearner(30)) {
 
 			GameScene.show(new WndReload(cause));
 
