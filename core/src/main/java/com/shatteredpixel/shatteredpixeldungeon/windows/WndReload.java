@@ -55,21 +55,10 @@ public class WndReload extends Window {
         addButton( new RedButton( Messages.get(this, "reload") ) {
             @Override
             protected void onClick() {
-                Game.runOnRenderThread(new Callback() {
-                    @Override
-                    public void call() {
-                        String fileName = GamesInProgress.gameSave(GamesInProgress.curSlot);
-                        if (FileUtils.fileExists(fileName)) {
-                            FileUtils.deleteFile(fileName);
-                        }
+                hide();
 
-                        try {
-                            Dungeon.loadGame(GamesInProgress.curSlot, true);
-                        } catch (IOException e) {
-                            ShatteredPixelDungeon.reportException(e);
-                        }
-                    }
-                });
+                InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
+                Game.switchScene( InterlevelScene.class );
             }
         });
 
